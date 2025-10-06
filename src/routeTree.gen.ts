@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutServicesIdRouteImport } from './routes/_layout/services/$id'
 import { Route as LayoutNewsIdRouteImport } from './routes/_layout/news/$id'
 
 const LayoutRoute = LayoutRouteImport.update({
@@ -22,6 +23,11 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutServicesIdRoute = LayoutServicesIdRouteImport.update({
+  id: '/services/$id',
+  path: '/services/$id',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutNewsIdRoute = LayoutNewsIdRouteImport.update({
   id: '/news/$id',
   path: '/news/$id',
@@ -31,23 +37,31 @@ const LayoutNewsIdRoute = LayoutNewsIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/news/$id': typeof LayoutNewsIdRoute
+  '/services/$id': typeof LayoutServicesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
   '/news/$id': typeof LayoutNewsIdRoute
+  '/services/$id': typeof LayoutServicesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/news/$id': typeof LayoutNewsIdRoute
+  '/_layout/services/$id': typeof LayoutServicesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/news/$id'
+  fullPaths: '/' | '/news/$id' | '/services/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/news/$id'
-  id: '__root__' | '/_layout' | '/_layout/' | '/_layout/news/$id'
+  to: '/' | '/news/$id' | '/services/$id'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/_layout/'
+    | '/_layout/news/$id'
+    | '/_layout/services/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -70,6 +84,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/services/$id': {
+      id: '/_layout/services/$id'
+      path: '/services/$id'
+      fullPath: '/services/$id'
+      preLoaderRoute: typeof LayoutServicesIdRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/news/$id': {
       id: '/_layout/news/$id'
       path: '/news/$id'
@@ -83,11 +104,13 @@ declare module '@tanstack/react-router' {
 interface LayoutRouteChildren {
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutNewsIdRoute: typeof LayoutNewsIdRoute
+  LayoutServicesIdRoute: typeof LayoutServicesIdRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutNewsIdRoute: LayoutNewsIdRoute,
+  LayoutServicesIdRoute: LayoutServicesIdRoute,
 }
 
 const LayoutRouteWithChildren =

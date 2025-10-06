@@ -68,7 +68,7 @@ const news = [
   
 export const News = () => {
   return (
-    <section id="news" className="py-20">
+    <section id="news" className="py-10">
       <Container>
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Yangiliklar</h2>

@@ -4,7 +4,7 @@ import { Container } from "src/components/layout"
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen py-20 lg:py-32">
+    <section className="relative py-20 lg:py-25">
       <Container>
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl lg:text-6xl font-bold text-balance mb-6">
