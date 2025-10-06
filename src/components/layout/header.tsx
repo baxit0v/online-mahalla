@@ -17,6 +17,9 @@ export const Header = () => {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
+            <a href="#news" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Yangilikar
+            </a>
             <a href="#services" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Xizmatlar
             </a>

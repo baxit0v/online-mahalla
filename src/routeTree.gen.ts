@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutNewsIdRouteImport } from './routes/_layout/news/$id'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -21,24 +22,32 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutNewsIdRoute = LayoutNewsIdRouteImport.update({
+  id: '/news/$id',
+  path: '/news/$id',
+  getParentRoute: () => LayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
+  '/news/$id': typeof LayoutNewsIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof LayoutIndexRoute
+  '/news/$id': typeof LayoutNewsIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/news/$id': typeof LayoutNewsIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/news/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_layout' | '/_layout/'
+  to: '/' | '/news/$id'
+  id: '__root__' | '/_layout' | '/_layout/' | '/_layout/news/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,15 +70,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/news/$id': {
+      id: '/_layout/news/$id'
+      path: '/news/$id'
+      fullPath: '/news/$id'
+      preLoaderRoute: typeof LayoutNewsIdRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutNewsIdRoute: typeof LayoutNewsIdRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutNewsIdRoute: LayoutNewsIdRoute,
 }
 
 const LayoutRouteWithChildren =
