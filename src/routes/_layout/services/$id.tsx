@@ -75,7 +75,7 @@ function ServicePage() {
   const Icon = service.icon;
 
   return (
-    <section className="py-20">
+    <section id="services" className="py-20">
       <Container>
         <Link to="/" hash="services" className="inline-block mb-8" onClick={() => window.scrollTo(0, 0)}>
           <Button variant="outline">

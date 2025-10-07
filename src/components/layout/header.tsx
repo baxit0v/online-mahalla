@@ -1,7 +1,48 @@
+import { useEffect, useState } from "react"
 import { Container } from "../ui/container"
-
+import { useLocation } from "@tanstack/react-router"
 
 export const Header = () => {
+  const [activeSection, setActiveSection] = useState("")
+  const location = useLocation()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section[id]")
+      let current = ""
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= 100 && rect.bottom >= 100) {
+          current = section.id
+        }
+      })
+
+      setActiveSection(current)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    handleScroll()
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "")
+      setActiveSection(id)
+      const el = document.getElementById(id)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }
+  }, [location.hash])
+
+  const linkClass = (id: string) =>
+    `text-sm font-medium transition-colors ${
+      activeSection === id ? "text-blue-500" : "text-foreground hover:text-primary"
+    }`
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Container>
@@ -17,30 +58,16 @@ export const Header = () => {
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#news" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Yangilikar
-            </a>
-            <a href="#services" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Xizmatlar
-            </a>
-            <a href="#business" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Biznes Navigator
-            </a>
-            <a href="#statistics" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Statistika
-            </a>
-            <a href="#gallery" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Galereya
-            </a>
-            <a href="#faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              FAQ
-            </a>
-            <a href="#contact" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Aloqa
-            </a>
+            <a href="#services" className={linkClass("services")}>Xizmatlar</a>
+            <a href="#news" className={linkClass("news")}>Yangilikar</a>
+            <a href="#business" className={linkClass("business")}>Biznes Navigator</a>
+            <a href="#statistics" className={linkClass("statistics")}>Statistika</a>
+            <a href="#gallery" className={linkClass("gallery")}>Galereya</a>
+            <a href="#faq" className={linkClass("faq")}>FAQ</a>
+            <a href="#contact" className={linkClass("contact")}>Aloqa</a>
           </nav>
         </div>
       </Container>
-    </header >
+    </header>
   )
 }

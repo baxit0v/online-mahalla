@@ -89,7 +89,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="py-20">
+    <section id="news" className="py-20">
       <Container>
         <div className="max-w-3xl mx-auto">
           {/* 🔙 Кнопка назад */}

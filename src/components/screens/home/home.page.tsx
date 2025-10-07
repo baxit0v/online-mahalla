@@ -12,8 +12,8 @@ export const HomePage = () => {
     return (
         <main className="bg-gradient-to-b from-sky-100 via-sky-100 to-white">
             <Hero />
-            <News/>
             <Services />
+            <News/>
             <BusinessNavigator />
             <RegionalMap />
             <StatsDashboard />
