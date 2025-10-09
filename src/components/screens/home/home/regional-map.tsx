@@ -119,7 +119,7 @@ export default function RegionalMap() {
   const renderStats = () => {
     if (!selectedDistrict && !selectedMahalla) {
       return (
-        <Card className="p-6 flex flex-col items-center justify-center text-center text-muted-foreground">
+        <Card className="h-full hover:shadow-md transition-all bg-gradient-to-br from-emerald-50 via-white to-lime-50 border border-emerald-100/60 backdrop-blur-sm p-6 flex flex-col items-center justify-center text-center text-muted-foreground">
           <MapPin className="h-12 w-12 mb-3 text-primary" />
           <p className="text-lg font-medium">Hudud tanlang</p>
           <p className="text-sm">Statistika shu yerda chiqadi</p>
@@ -129,7 +129,7 @@ export default function RegionalMap() {
 
     if (selectedDistrict && !selectedMahalla) {
       return (
-        <Card className="hover:shadow-md transition-shadow">
+        <Card className="h-full hover:shadow-md transition-all bg-gradient-to-br from-emerald-50 via-white to-lime-50 border border-emerald-100/60 backdrop-blur-sm">
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">
@@ -172,7 +172,8 @@ export default function RegionalMap() {
 
     if (selectedMahalla) {
       return (
-        <Card className="hover:shadow-md transition-shadow">
+        <Card className="h-full hover:shadow-md transition-all bg-gradient-to-br from-emerald-50 via-white to-lime-50 border border-emerald-100/60 backdrop-blur-sm">
+
           <CardHeader className="pb-3">
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">{selectedMahalla.text}</CardTitle>
@@ -242,14 +243,43 @@ export default function RegionalMap() {
 
             {activeTab === "team" && (
               <div className="space-y-2 text-sm">
-                <p><span className="font-semibold">1.</span> Абдуллаев Нурбек — <span className="text-muted-foreground">+998 90 123 45 67</span></p>
-                <p><span className="font-semibold">2.</span> Тошпулатов Азиз — <span className="text-muted-foreground">+998 93 234 56 78</span></p>
-                <p><span className="font-semibold">3.</span> Юсупова Гулноза — <span className="text-muted-foreground">+998 91 345 67 89</span></p>
-                <p><span className="font-semibold">4.</span> Рахимов Жавлон — <span className="text-muted-foreground">+998 99 111 22 33</span></p>
-                <p><span className="font-semibold">5.</span> Хусанова Шахло — <span className="text-muted-foreground">+998 95 555 66 77</span></p>
-                <p><span className="font-semibold">6.</span> Қурбонов Элдор — <span className="text-muted-foreground">+998 97 444 55 66</span></p>
-                <p><span className="font-semibold">7.</span> Абдуллаева Севара — <span className="text-muted-foreground">+998 90 777 88 99</span></p>
-              </div>
+              <p>
+                <span className="font-semibold">1.</span> Абдуллаев Нурбек — 
+                <span className="italic text-primary ml-1">ҳоким ёрдамчиси</span> — 
+                <span className="text-muted-foreground ml-1">+998 90 123 45 67</span>
+              </p>
+              <p>
+                <span className="font-semibold">2.</span> Тошпулатов Азиз — 
+                <span className="italic text-primary ml-1">маҳалла раиси</span> — 
+                <span className="text-muted-foreground ml-1">+998 93 234 56 78</span>
+              </p>
+              <p>
+                <span className="font-semibold">3.</span> Юсупова Гулноза — 
+                <span className="italic text-primary ml-1">ёшлар етакчиси</span> — 
+                <span className="text-muted-foreground ml-1">+998 91 345 67 89</span>
+              </p>
+              <p>
+                <span className="font-semibold">4.</span> Рахимов Жавлон — 
+                <span className="italic text-primary ml-1">хотин-қизлар фаоли</span> — 
+                <span className="text-muted-foreground ml-1">+998 99 111 22 33</span>
+              </p>
+              <p>
+                <span className="font-semibold">5.</span> Хусанова Шахло — 
+                <span className="italic text-primary ml-1">профилактика инспектори</span> — 
+                <span className="text-muted-foreground ml-1">+998 95 555 66 77</span>
+              </p>
+              <p>
+                <span className="font-semibold">6.</span> Қурбонов Элдор — 
+                <span className="italic text-primary ml-1">солиқ инспектори</span> — 
+                <span className="text-muted-foreground ml-1">+998 97 444 55 66</span>
+              </p>
+              <p>
+                <span className="font-semibold">7.</span> Абдуллаева Севара — 
+                <span className="italic text-primary ml-1">ижтимоий ходим</span> — 
+                <span className="text-muted-foreground ml-1">+998 90 777 88 99</span>
+              </p>
+            </div>
+            
             )}
           </CardContent>
         </Card>
@@ -263,7 +293,7 @@ export default function RegionalMap() {
     <section className="py-12 bg-muted/30">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Карта */}
-        <Card className="p-4">
+        <Card className="p-4" >
           <MapContainer
             center={[42.47, 59.61]}
             zoom={6}
